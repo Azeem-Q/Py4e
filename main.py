@@ -32,3 +32,4 @@ sqlstr = 'SELECT email, count FROM Counts ORDER BY count DESC LIMIT 10'
 for row in cur.execute(sqlstr):
     print(str(row[0]), row[1])
 
+cur.close()
