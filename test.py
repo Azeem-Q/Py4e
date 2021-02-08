@@ -737,7 +737,11 @@ import urllib.request, urllib.parse, urllib.error
 import twurl
 import json
 
+<<<<<<< HEAD
 TWITTER_URL = 'https://api.twitter.com/1.1/friends/list.json'
+=======
+TWITTER_URL = 'https://api.twitter.com/1.1.friends/list.json'
+>>>>>>> 13382388d6aa4d29709f573b0f1054046f42667d
 
 while True:
 	print('')
@@ -751,6 +755,7 @@ while True:
 	headers = dict(connection.getheaders())
 	print('Remaining', headers['x-rate-limit-remaining'])
 	js = json.loads(data)
+<<<<<<< HEAD
 	#print(json.dumps(js, indent=4))
 
 	for u in js['users']:
@@ -761,6 +766,16 @@ while True:
 		s = u['status']['text']
 		print('  ', s[:50])
 '''
+=======
+	print(json.dumps(js, indent=4))
+
+	for u in js['users']:
+		print(u['screen_name'])
+		s = u['status']['text']
+		print('	', s[:50])
+'''		
+
+>>>>>>> 13382388d6aa4d29709f573b0f1054046f42667d
 #chapter: OOP
 
 '''
@@ -823,5 +838,34 @@ j.party()
 s.party()
 '''
 
+<<<<<<< HEAD
 
 		
+=======
+'''
+class PartyAnimal:
+	x = 0
+	name = ''
+	def __init__(self, nam):
+		self.name = nam
+		print(self.name, 'constructed')
+
+	def party(self):
+		self.x = self.x + 1
+		print(self.name, 'party count', self.x)
+
+class FootballFan(PartyAnimal):
+	points = 0
+	def touchdown(self):
+		self.points = self.points + 7
+		self.party()
+		print(self.name, 'points', self.points)
+
+s = PartyAnimal('Sally')
+s.party()
+
+j = FootballFan('Jim')
+j.party()
+j.touchdown()
+'''
+>>>>>>> 13382388d6aa4d29709f573b0f1054046f42667d
