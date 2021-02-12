@@ -1,14 +1,12 @@
 #chapter: databases
 '''
 import sqlite3
-
 conn = sqlite3.connect('emaildb.sqlite')
 cur = conn.cursor()
 
 cur.execute('DROP TABLE IF EXISTS Counts')
 
-cur.execute('''
-CREATE TABLE Counts (email TEXT, count INTEGER)''')
+cur.execute('CREATE TABLE Counts (email TEXT, count INTEGER)')
 
 fname = input('Enter file name: ')
 if (len(fname) < 1): fname = 'mbox-short.txt'
@@ -20,8 +18,7 @@ for line in fh:
     cur.execute('SELECT count FROM Counts WHERE email = ?', (email,))
     row = cur.fetchone()
     if row is None:
-        cur.execute('''INSERT INTO Counts (email, count)
-                VALUES (?, 1)''', (email,))
+        cur.execute('INSERT INTO Counts (email, count) VALUES (?, 1)', (email,))
     else:
         cur.execute('UPDATE Counts SET count = count + 1 WHERE email = ?', (email,))
     conn.commit()
@@ -35,7 +32,10 @@ for row in cur.execute(sqlstr):
 cur.close()
 '''
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a6b2bd70ff5c866902673a30627eff458ad9a66f
 from urllib.request import urlopen
 import urllib.error
 import twurl
@@ -67,6 +67,7 @@ while True:
         except:
             print('No unretrieved Twitter accounts found')
             continue
+<<<<<<< HEAD
 
     url = twurl.augment(TWITTER_URL, {'screen_name': acct, 'count': '5'})
     print('Retrieving', url)
@@ -80,6 +81,20 @@ while True:
     # print json.dumps(js, indent=4)
 
     cur.execute('UPDATE Twitter SET retrieved=1 WHERE nanme = ?', (acct, ))
+=======
+    url = twurl.augment(TWITTER_URL, {'screen_name:', acct, 'count': '5'})
+    print('Retrieving', url)
+    connection = urlopen(url, context=ctx)
+    data = connection.read().decode()
+    headers = dict(connection.getheaders())
+    
+    print('Remaining', headers['x-rate-limit-remaining'])
+    js = json.loads(data)
+    # Debugging
+    # print(json.dumps(js, indent=4))
+
+    cur.execute('UPDATE Twitter SET retrieved=1 WHERE name = ?', (acct, ))
+>>>>>>> a6b2bd70ff5c866902673a30627eff458ad9a66f
 
     countnew = 0
     countold = 0
@@ -87,7 +102,17 @@ while True:
         friend = u['screen_name']
         print(friend)
         cur.execute('SELECT friends FROM Twitter WHERE name = ? LIMIT 1', (friend, ))
+<<<<<<< HEAD
 
         try:
             count = cur.fetchone()[0]
             
+=======
+        try:
+            count = cur.fetchone()[0]
+            cur.execute('UPDATE Twitter SET friends = ? WHERE name = ?', (count+1, friend))
+            countold = countold + 1
+        except:
+            cur.execute('''INSERT INTO Twitter (name, retrieved, friends)
+                        VALUES (?, 0, 1)''')
+>>>>>>> a6b2bd70ff5c866902673a30627eff458ad9a66f
