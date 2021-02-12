@@ -737,7 +737,7 @@ import urllib.request, urllib.parse, urllib.error
 import twurl
 import json
 
-TWITTER_URL = 'https://api.twitter.com/1.1.friends/list.json'
+TWITTER_URL = 'https://api.twitter.com/1.1/friends/list.json'
 
 while True:
 	print('')
