@@ -63,7 +63,7 @@ while True:
         except:
             print('No unretrieved Twitter accounts found')
             continue
-    url = twurl.augment(TWITTER_URL, {'screen_name:', acct, 'count': '5'})
+    url = twurl.augment(TWITTER_URL, {'screen_name': acct, 'count': '5'})
     print('Retrieving', url)
     connection = urlopen(url, context=ctx)
     data = connection.read().decode()
@@ -88,4 +88,9 @@ while True:
             countold = countold + 1
         except:
             cur.execute('''INSERT INTO Twitter (name, retrieved, friends)
-                        VALUES (?, 0, 1)''')
+                        VALUES (?, 0, 1)''', (friend, ))
+            countnew = countnew + 1
+    print('New accounts=', countnew, ' revisited=', countold)
+    conn.commit()
+
+cur.close()
