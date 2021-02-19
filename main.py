@@ -68,6 +68,7 @@ while True:
             print('No unretrieved Twitter accounts found')
             continue
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     url = twurl.augment(TWITTER_URL, {'screen_name': acct, 'count': '5'})
     print('Retrieving', url)
@@ -83,6 +84,9 @@ while True:
     cur.execute('UPDATE Twitter SET retrieved=1 WHERE nanme = ?', (acct, ))
 =======
     url = twurl.augment(TWITTER_URL, {'screen_name:', acct, 'count': '5'})
+=======
+    url = twurl.augment(TWITTER_URL, {'screen_name': acct, 'count': '5'})
+>>>>>>> 8d3c42e2d825cc855f7d770cb479e708ddef7b52
     print('Retrieving', url)
     connection = urlopen(url, context=ctx)
     data = connection.read().decode()
@@ -114,5 +118,14 @@ while True:
             countold = countold + 1
         except:
             cur.execute('''INSERT INTO Twitter (name, retrieved, friends)
+<<<<<<< HEAD
                         VALUES (?, 0, 1)''')
 >>>>>>> a6b2bd70ff5c866902673a30627eff458ad9a66f
+=======
+                        VALUES (?, 0, 1)''', (friend, ))
+            countnew = countnew + 1
+    print('New accounts=', countnew, ' revisited=', countold)
+    conn.commit()
+
+cur.close()
+>>>>>>> 8d3c42e2d825cc855f7d770cb479e708ddef7b52
